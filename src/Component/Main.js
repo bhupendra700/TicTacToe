@@ -22,11 +22,11 @@ function Main({ turn, setTurn, win, setWin }) {
     createAudio.playbackRate = 2.0;
     if (!win) {
       createAudio.pause();
-      if (e.target.innerHTML == "") {
-        if (turn == "X") {
+      if (e.target.innerHTML === "") {
+        if (turn === "X") {
           e.target.innerHTML = `${turn}`;
           setTurn("0");
-        } else if (turn == "0") {
+        } else if (turn === "0") {
           e.target.innerHTML = `${turn}`;
           setTurn("X");
         }
@@ -46,7 +46,7 @@ function Main({ turn, setTurn, win, setWin }) {
         setWin(true);
       }
     }
-  }, [turn]);
+  }, [turn , setWin , windata]);
 
   return (
     <div className="container" ref={container}>
