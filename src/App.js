@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Button from "./Component/Button";
+import Heading from "./Component/Heading";
+import Main from "./Component/Main";
+import Winner from "./Component/Winner";
+import "./index.css";
+import sound from "../src/Component/winner.mp3"
 
 function App() {
+  const rno = Math.floor(Math.random() * 2);
+
+  const [turn, setTurn] = useState(rno === 0 ? "X" : "0");
+
+  let [win, setWin] = useState(false);
+
+  const createWinSound = new Audio(sound);
+
+  useEffect(()=>{
+    if(win){
+      createWinSound.play();
+    }
+  } , [win]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <div className="mainbody">
+          <Heading turn={turn} win={win}/>
+          <Main turn={turn} setTurn={setTurn} win={win} setWin={setWin}/>
+          <Winner turn={turn} win={win}/>
+          <Button createWinSound={createWinSound} setWin={setWin} setTurn={setTurn}/>
+        </div>
+    </>
   );
 }
 
